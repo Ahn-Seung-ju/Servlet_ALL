@@ -1,7 +1,7 @@
-﻿<%@page import="kr.or.bit.utils.ThePager"%>
+﻿<%@page import="kr.or.bit.dao.BoardDao"%>
+<%@page import="kr.or.bit.utils.ThePager"%>
 <%@page import="kr.or.bit.dto.Board"%>
 <%@page import="java.util.List"%>
-<%@page import="kr.or.bit.service.BoardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
@@ -20,10 +20,9 @@
 	게시판 목록
 	<br>
 	<%
-		BoardService service = BoardService.getInBoardService();
-		
+		BoardDao dao = new BoardDao();
 		//게시물 총 건수
-		int totalboardcount = service.totalBoardCount();
+		int totalboardcount = dao.totalBoardCount();
 		
 		//상세보기 >> 다시  LIST 넘어올때  >> 현재 페이지 설정
 		String ps = request.getParameter("ps"); //pagesize
@@ -54,7 +53,7 @@
 		//102건 : pagesize=5 >> pagecount=21페이지
 		
 		//전체 목록 가져오기
-		List<Board> list = service.list(cpage, pagesize); //list >> 1 , 20
+		List<Board> list = dao.list(cpage, pagesize); //list >> 1 , 20
 		
     %>
 	<c:set var="pagesize" value="<%=pagesize%>" />
